@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+	<UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Palette de couleur.xaml.cs" />
+    <Compile Remove="Palette.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Audium.png" />
+    <None Remove="audium_logo.png" />
+    <None Remove="img\allman.jpg" />
+    <None Remove="img\beattles.jpg" />
+    <None Remove="img\beethov.jpg" />
+    <None Remove="img\default.png" />
+    <None Remove="img\hypnoflip.jpg" />
+    <None Remove="img\iam.jpg" />
+    <None Remove="img\opened-folder.png" />
+    <None Remove="img\pink.jpg" />
+    <None Remove="img\pp.png" />
+    <None Remove="img\proleter.jpg" />
+    <None Remove="img\ram.jpg" />
+    <None Remove="img\red.jpg" />
+    <None Remove="img\shosta.jpg" />
+    <None Remove="img\wagner.jpg" />
+    <None Remove="logo.ico" />
+    <None Remove="vinyle.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Palette de couleur.xaml" />
+    <Page Remove="Palette.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataContractPersistance\DataContractPersistance.csproj" />
+    <ProjectReference Include="..\ExternalResources\ExternalResources.csproj" />
+    <ProjectReference Include="..\JsonPersistance\JsonPersistance.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="img\allman.jpg" />
+    <Resource Include="img\beattles.jpg" />
+    <Resource Include="img\beethov.jpg" />
+    <Resource Include="img\default.png" />
+    <Resource Include="img\hypnoflip.jpg" />
+    <Resource Include="img\iam.jpg" />
+    <Resource Include="img\opened-folder.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\pp.png" />
+    <Resource Include="img\proleter.jpg" />
+    <Resource Include="img\ram.jpg" />
+    <Resource Include="img\red.jpg" />
+    <Resource Include="img\shosta.jpg" />
+    <Resource Include="img\wagner.jpg" />
+    <Resource Include="logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="QuickStart\" />
+  </ItemGroup>
+
+</Project>

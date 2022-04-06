@@ -1,0 +1,91 @@
+{
+  "$id": "1",
+  "$type": "DataContractPersistance.DataToPersist, DataContractPersistance",
+  "Mediatheque": {
+    "$id": "2",
+    "$type": "System.Collections.Generic.Dictionary`2[[Donnees.EnsembleAudio, Donnees],[System.Collections.Generic.LinkedList`1[[Donnees.Piste, Donnees]], System.Collections]], System.Private.CoreLib",
+    "$values": [
+      {
+        "Key": {
+          "$id": "3",
+          "$type": "Donnees.EnsembleAudio, Donnees",
+          "Titre": "The Hypnoflip Invasion",
+          "DateAjout": "2021-06-07T12:16:41.4673175+02:00",
+          "Note": 5,
+          "Description": "The Hypnoflip Invasion est le troisième album de Stupeflip, sorti le 28 février 2011, édité sous le label Etic System.\r\n1. Invasion 1:45\r\n2. Stupeflip Vite !!! 4:38\r\n3. La Menuiserie 4:54\r\n4. Gaëlle 4:05\r\n5. Check Da Crou 3:50\r\n6. Le Spleen Des Petits 3:08\r\n7. Dangereux !! 0:31\r\n8. Hater's Killah 3:42\r\n9. Strange Pain 0:43\r\n10. Gem Lé Moch' 3:17\r\n11. Sinode Pibouin 4:12\r\n12. 72.8 Mhz 0:12\r\n13. Ce Petit Blouson En Daim 3:32\r\n14. Dark Warriors 1:42\r\n15. Lettre A Mylène 4:10\r\n16. Ancienne Prophétie 0:36\r\n17. Apocalypse 894 3:20\r\n18. La Mort À Pop-Hip 1:25\r\n19. Le Cœur Qui Cogne 3:56\r\n20. Keep The Faith 1:12\r\n21. Région Est (+ Bonus Cold World) 11:18",
+          "CheminImage": "hypnoflip.jpg",
+          "CmptEcoute": 0,
+          "Favori": true,
+          "Genre": 4
+        },
+        "Value": {
+          "$id": "4",
+          "$type": "System.Collections.Generic.LinkedList`1[[Donnees.Piste, Donnees]], System.Collections",
+          "$values": [
+            {
+              "$id": "5",
+              "$type": "Donnees.Morceau, Donnees",
+              "Artiste": "",
+              "Source": ".\\music\\Track 1.mp3",
+              "Titre": "Intro",
+              "DateAjout": "2021-06-12T12:54:09.9463419+02:00"
+            },
+            {
+              "$id": "6",
+              "$type": "Donnees.Morceau, Donnees",
+              "Artiste": "",
+              "Source": ".\\music\\Track 2.mp3",
+              "Titre": "Stupeflip Vite !!!",
+              "DateAjout": "2021-06-12T14:26:58.0743612+02:00"
+            }
+          ]
+        }
+      },
+      {
+        "Key": {
+          "$id": "7",
+          "$type": "Donnees.EnsembleAudio, Donnees",
+          "Titre": "2001 : A Space Odyssey",
+          "DateAjout": "2021-06-14T10:29:48.9505743+02:00",
+          "Note": 5,
+          "Description": "2001, l'Odyssée de l'espace (2001: A Space Odyssey) est un film britannico-américain de science-fiction réalisé par Stanley Kubrick, sorti en 1968, basé sur un scénario co-écrit par Kubrick et le romancier Arthur C. Clarke, partiellement inspiré de deux nouvelles de Clarke intitulées À l'aube de l'histoire et La Sentinelle.",
+          "CheminImage": "2001.jpg",
+          "CmptEcoute": 0,
+          "Favori": false,
+          "Genre": 6
+        },
+        "Value": {
+          "$id": "8",
+          "$type": "System.Collections.Generic.LinkedList`1[[Donnees.Piste, Donnees]], System.Collections",
+          "$values": [
+            {
+              "$id": "9",
+              "$type": "Donnees.Morceau, Donnees",
+              "Artiste": "",
+              "Source": ".\\music\\Track 3.mp3",
+              "Titre": "The Blue Danube",
+              "DateAjout": "2021-06-14T10:31:50.0768952+02:00"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "ListeFav": {
+    "$id": "10",
+    "$type": "System.Collections.Generic.List`1[[Donnees.EnsembleAudio, Donnees]], System.Private.CoreLib",
+    "$values": [
+      {
+        "$ref": "3"
+      }
+    ]
+  },
+  "MP": {
+    "$id": "11",
+    "$type": "Gestionnaires.ManagerProfil, Gestionnaires",
+    "Nom": "Nom d'utilisateur",
+    "CheminImage": "..\\icondefault\\pp.png",
+    "CouleurTheme": "Blue",
+    "CheminBaseDonnees": null
+  }
+}

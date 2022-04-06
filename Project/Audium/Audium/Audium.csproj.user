@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>C:\Users\yanni\Desktop\Cours\P4\IHM C#\Projet\Project\Audium\Audium\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Parametres.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Profil.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="userControls\UCExpDetail.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="userControls\UCPochette.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Parametres.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Profil.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="userControls\UCExpDetail.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="userControls\UCPochette.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

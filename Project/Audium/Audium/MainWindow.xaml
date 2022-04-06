@@ -1,0 +1,329 @@
+﻿<Window x:Class="Audium.MainWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Audium"
+        mc:Ignorable="d"
+        xmlns:conv="clr-namespace:Audium.converters" 
+        xmlns:uc="clr-namespace:Audium.userControls"
+        Title="Audium" Height="900" Width="1600" MinWidth="1220" MinHeight="900" WindowState="Maximized"
+        Closing="Window_Closing" Loaded="Window_Loaded"
+        Icon="logo.ico">
+    <Window.Resources>
+        <SolidColorBrush Color="Black" x:Key="DisqueBgColor"/>
+        <Size Height="300" Width="300" x:Key="Taillepardefaut"/>
+        <conv:String2CompactString x:Key="String2CompactString"/>
+        <conv:String2Image x:Key="String2Image"/>
+        <conv:EGenre2String x:Key="EGenre2String"/>
+    </Window.Resources>
+   
+    <DockPanel>
+        <Border BorderBrush="Black" BorderThickness="0"  Margin="0" DockPanel.Dock="Left">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#171717">
+                <StackPanel Width="300">
+                    <StackPanel.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextAlignment" Value="Center"/>
+                            <Setter Property="FontFamily" Value="{DynamicResource MaterialDesignFont}"/>
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="Margin" Value="0,50,0,10"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <materialDesign:ColorZone
+                        Mode="Dark"
+                        Padding="0,0,10,10"
+                        CornerRadius="2"
+                        Panel.ZIndex="1"
+                        Margin="20"
+                        Height="60"
+                        BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                        BorderThickness="1"                       
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button
+								Style="{DynamicResource MaterialDesignToolButton}"
+								Margin="5,15,5,0"
+								Height="auto">
+                                <materialDesign:PackIcon
+									Kind="Search"
+									Opacity=".56" />
+                            </Button>
+                            <TextBox
+                                 MaxLines="1"
+                                x:Name="Recherche"
+								Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+								VerticalAlignment="Top"
+								AcceptsReturn="True"
+								TextWrapping="Wrap"
+								VerticalScrollBarVisibility="Auto"
+								materialDesign:HintAssist.Hint="Rechercher"
+								Cursor="IBeam"
+                                FontSize="15"
+								Grid.Column="1"
+                            />
+                        </Grid>
+                    </materialDesign:ColorZone>
+                    <GroupBox
+                        Header="Tags"
+                        Margin="16"
+                        FontSize="15" 
+                        Style="{DynamicResource MaterialDesignCardGroupBox}"
+                        materialDesign:ColorZoneAssist.Mode="PrimaryMid">
+                        <GroupBox.Resources>
+                            <Style TargetType="CheckBox" BasedOn="{StaticResource MaterialDesignLightCheckBox}">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Style>
+                        </GroupBox.Resources>
+                        <StackPanel>
+                            <ListBox ItemsSource="{Binding Mgr.ListeGenres}" SelectedItem="{Binding Mgr.GenreSelect}" MouseLeftButtonUp="TagListClicked" >
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Converter={StaticResource EGenre2String}}" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <!--
+                            <CheckBox Content="Ajoutés récemment (20)" />
+                            <CheckBox Content="Favoris (0)" />
+                            <CheckBox Content="Blues (18)" />
+                            <CheckBox Content="Classique (43)" />
+                            <CheckBox Content="Bande Originale (180)" />
+                            <CheckBox Content="Hip-Hop (20)" />
+                            <CheckBox Content="Jazz (34)" />
+                            <CheckBox Content="Pop (3)" />
+                            <CheckBox Content="Rock (45)" />-->
+                            
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox
+                        MaxHeight="500"
+                        FontSize="15"
+                        Header="Favoris"
+                        Margin="16"
+                        BorderThickness="20"
+                        Style="{DynamicResource MaterialDesignCardGroupBox}"
+                        materialDesign:ColorZoneAssist.Mode="PrimaryMid">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Orientation="Horizontal">
+                                <ListBox x:Name="ListeFav" ItemsSource="{Binding Mgr.ListeFavoris}" Width="500" SelectedItem="{Binding MgrEnsemble.EnsembleSelect}" MouseLeftButtonUp ="OpenExp">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <WrapPanel Orientation="Horizontal">
+                                                <Button
+                                                    Style="{StaticResource PlayButton_MD}"
+                                                    Tag ="{Binding}" Click="LireTout"
+                                                    > 
+                                                    <materialDesign:PackIcon Kind="Play" />
+                                                </Button>
+                                                <TextBlock Text="{Binding Titre, Converter={StaticResource String2CompactString}}" Margin="0,15,0,0"/>
+                                            </WrapPanel>
+                                        </DataTemplate>
+
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </GroupBox>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="0" DockPanel.Dock="Top" Margin="0">
+            <Grid  Background="#262626" Height="100">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="1*"/>
+                    <ColumnDefinition  Width="1*"/>
+                    <ColumnDefinition  Width="1*"/>
+                    <ColumnDefinition  Width="8*"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button
+                      Click="OpenFolderMusic"
+                      Style="{StaticResource TopButton_MD}"
+                      ToolTip="Accéder à l'emplacement de sauvegarde" Cursor="Hand">
+                    <materialDesign:PackIcon Height="50" Width="50" Kind="FolderMusic" />
+                </Button>
+                <Button 
+                      Style="{StaticResource TopButton_MD}"
+                      Grid.Column="1"
+                      Click="AddMusic"
+                      ToolTip="Ajouter un album" Cursor="Hand">
+                    <materialDesign:PackIcon Height="50" Width="50" Kind="PlaylistAdd" />
+                    
+                </Button>
+                <Button 
+                    Style="{StaticResource TopButton_MD}"
+                      Grid.Column="2"
+                      Click="OpenParameters"
+                      ToolTip="Paramètres" Cursor="Hand">
+                    <materialDesign:PackIcon Height="50" Width="50" Kind="Cog" />
+                </Button>
+                <Button 
+                    Style="{StaticResource TopButton_MD}"
+                      Click="OpenProfile"
+                      Grid.Column="4"
+                      ToolTip="Profil" Cursor="Hand">
+                    <materialDesign:PackIcon Height="50" Width="50" Kind="Person" />
+                </Button>
+            </Grid>
+        </Border>
+    
+        <Border BorderBrush="Black" BorderThickness="0"  DockPanel.Dock="Bottom" Margin="0"  >
+            <Grid Background="#262626"  Height="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition  Width="5*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Button
+                    ToolTip="Lire/Pause"
+                    Style="{StaticResource BottomButton_MD}"
+                   
+                    Grid.Column="3"
+                    Click="PlayPause"
+                    >
+                    <materialDesign:PackIcon Kind="Play" Name="PlayPauseIcon"/>
+                </Button>
+                <Button
+                    Style="{StaticResource BottomButton_MD}"
+                    ToolTip="Précédent"
+                    Grid.Column="2"
+                    Click="Media_Previous">
+
+                    <materialDesign:PackIcon Kind="Rewind" />
+                </Button>
+                <Button
+                     Style="{StaticResource BottomButton_MD}"
+                    ToolTip="Suivant"
+                    Click="Media_Next"
+                    Grid.Column="4"
+                    >
+                    <materialDesign:PackIcon Kind="FastForward" />
+                </Button>
+
+                <StackPanel Grid.Column="0"  Grid.Row="0">
+                    <Grid  Height="50"  Width="50">
+                        <Image  Source="{Binding MgrPlayer.EnsembleLu.CheminImage, Converter={StaticResource String2Image}}"  Stretch="UniformToFill" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+                <WrapPanel Grid.Column="1" Orientation="Vertical">
+
+                    <TextBlock Name="TitleDisplay" TextWrapping="Wrap" FontSize="15" Foreground="White" Margin="0,5,0,0" />
+                    <TextBlock Name="TimerDisplay" Foreground="White"/>
+                </WrapPanel>
+                <Slider     
+                    IsMoveToPointEnabled="true"
+                    Name="ProgressBar"
+                    MouseLeftButtonUp="ProgressBarChanged"
+                    ValueChanged="ProgressBarValueSlided"
+                    Grid.Row="1" Grid.ColumnSpan="7" Margin="40,5" 
+                    Orientation="Horizontal"
+                                      
+                    Value="25" />
+                <StackPanel Grid.Column="7" Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="VolumeSource" Foreground="{DynamicResource PrimaryHueLightBrush}" VerticalAlignment="Center" Height="25" Width="25"/>
+                    <Slider VerticalAlignment="Center" Name="VolumeSlider" Width="50" Value="{Binding ElementName=Lecteur, Path=Volume,Mode=TwoWay}" Maximum="0.4" Minimum="0"  IsMoveToPointEnabled="True"/>
+                </StackPanel>
+                <MediaElement Name="Lecteur" LoadedBehavior="Manual"/>
+            </Grid>
+        </Border>
+        <DockPanel>
+            <Expander
+                x:Name="MainExp"
+                HorizontalAlignment="Stretch"
+                Background="#262626"
+                ExpandDirection="Up"
+                DockPanel.Dock="Bottom"
+                Foreground="{DynamicResource PrimaryHueLightBrush}"
+                Margin="0,-5,0,0"
+                Padding="0,0,0,0">
+                <Expander.Header>
+                    <TextBlock HorizontalAlignment="Right" FontSize="15" Margin="0,0,-10,0">Détails</TextBlock>
+                </Expander.Header>
+                <uc:UCExpDetail CliqueFavori="Clique_Fav" StopLecteur="ExpanderDetail_StopLecteur" x:Name="ExpanderDetail" />
+            </Expander>
+            <materialDesign:DialogHost Name="Dialog"
+                    IsOpen="False" CloseOnClickAway="True" 
+                    DialogTheme="Inherit">
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel 
+                                Margin="16">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                Text="Ajouter une Collection" />
+                        <TextBox
+                            x:Name="TitreBlock"
+                            materialDesign:HintAssist.Hint="Titre"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"/>
+                        <StackPanel
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+                            <Button
+                                  Style="{StaticResource MaterialDesignFlatButton}"
+                                  IsDefault="True"
+                                  Margin="10,20,10,0"
+                                  Click="ValiderAjout"
+                                  Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                  Content="Valider"/>
+                            <Button
+                                  Style="{StaticResource MaterialDesignFlatButton}"
+                                  IsCancel="True"
+                                  Margin="10,20,10,0"
+                                  Content="Annuler"
+                                  Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:DialogHost.DialogContent>
+
+                <ScrollViewer Background="#424242"  Style="{DynamicResource MaterialDesignScrollViewer}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+
+                    <ListBox Name="ListeKeys" ItemsSource="{Binding Mgr.ListeClé}" SelectedItem="{Binding MgrEnsemble.EnsembleSelect}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+
+                                <WrapPanel HorizontalAlignment="Center" />
+
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ListBox.ItemTemplate>
+
+                            <DataTemplate>
+                                <uc:UCPochette x:Name="UCPochette" ImageName="{Binding CheminImage}" BoutonLire="LireTout" CliquePochette="OpenExp" CliqueFavori="Clique_Fav"/>
+
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+
+
+
+
+
+
+
+                </ScrollViewer>
+
+
+            </materialDesign:DialogHost>
+        </DockPanel>
+    </DockPanel>
+</Window>

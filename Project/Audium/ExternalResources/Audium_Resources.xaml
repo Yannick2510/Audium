@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="TopButton_MD" TargetType="Button" BasedOn="{StaticResource MaterialDesignIconButton}">
+        <Setter Property="Height" Value="70"/>
+        <Setter Property="Width" Value="70"/>
+    </Style>
+    <Style x:Key="BottomButton_MD" TargetType="Button" BasedOn="{StaticResource MaterialDesignIconButton}">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignTextFieldBoxBackground}"/>
+        <Setter Property="Margin" Value="0,2,0,17"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <Style x:Key="PlayButton_MD" TargetType="Button" BasedOn="{StaticResource MaterialDesignIconButton}">
+        <Setter Property="ToolTip" Value="Lire"/>
+    </Style>
+</ResourceDictionary>

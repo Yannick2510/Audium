@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="Audium.userControls.UCPochette" 
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Audium.userControls"
+             mc:Ignorable="d" 
+             xmlns:conv="clr-namespace:Audium.converters" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="root">
+    <UserControl.Resources>
+        <conv:String2Image x:Key="String2Image"/>
+    </UserControl.Resources>
+    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="20,20" Height="220" Width="220">
+        <Canvas MouseLeftButtonUp="Canvas_MouseLeftButtonUp">
+            <Button Height="100" Width="100" Canvas.Top="60" Canvas.Left="60" Panel.ZIndex="1" Foreground="White" ToolTip="Lire" Cursor="Hand" Tag="{Binding}" Name="PlayButton" Click="PlayButton_Click" >
+
+                <Button.Style >
+                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignToolForegroundButton}">
+                        <Setter Property="Visibility" Value="Hidden" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}},Path=IsMouseOver}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+                <materialDesign:PackIcon Kind="Play" Height="100" Width="100"/>
+            </Button>
+            
+            <ToggleButton Content="{materialDesign:PackIcon Kind=Heart}" Height="35" Width="35" Canvas.Top="10" Canvas.Left="165" Panel.ZIndex="2" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton }"  ToolTip="Ajouter au favoris" Cursor="Hand" Tag="{Binding}"  IsChecked="{Binding Favori, Mode=OneWay}" Name="FavButton" Click="FavButton_Click"/>
+            <Grid Height="220" Width="220">
+                <Image  Source="{Binding ImageName, ElementName=root, Converter={StaticResource String2Image}}" Stretch="UniformToFill" HorizontalAlignment="Center"  VerticalAlignment="Center" />
+
+
+            </Grid>
+        </Canvas>
+       
+    </materialDesign:Card>
+</UserControl>
